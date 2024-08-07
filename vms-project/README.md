@@ -10,13 +10,9 @@ Enhance your Nx experience by installing [Nx Console](https://nx.dev/nx-console)
 provides an interactive UI to view your projects, run tasks, generate code, and more! Available for VSCode, IntelliJ and
 comes with a LSP for Vim users.
 
-## Start the application
+## Build the library
 
-Run `npx nx serve vms-project` to start the development server. Happy coding!
-
-## Build for production
-
-Run `npx nx build vms-project` to build the application. The build artifacts are stored in the output directory (e.g. `dist/` or `build/`), ready to be deployed.
+Run `npx nx build` to build the library. The build artifacts are stored in the output directory (i.e. `dist/`), ready to be published.
 
 ## Running tasks
 

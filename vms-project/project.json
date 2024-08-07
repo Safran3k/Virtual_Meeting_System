@@ -2,62 +2,28 @@
   "name": "vms-project",
   "$schema": "node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "src",
-  "projectType": "application",
+  "projectType": "library",
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nx/esbuild:esbuild",
+      "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
       "options": {
-        "platform": "node",
         "outputPath": "dist/vms-project",
-        "format": ["cjs"],
-        "bundle": false,
-        "main": "src/main.ts",
-        "tsConfig": "tsconfig.app.json",
-        "assets": ["src/assets"],
-        "generatePackageJson": true,
-        "esbuildOptions": {
-          "sourcemap": true,
-          "outExtension": {
-            ".js": ".js"
-          }
-        }
-      },
-      "configurations": {
-        "development": {},
-        "production": {
-          "generateLockfile": true,
-          "esbuildOptions": {
-            "sourcemap": false,
-            "outExtension": {
-              ".js": ".js"
-            }
-          }
-        }
+        "main": "./src/index.ts",
+        "tsConfig": "./tsconfig.lib.json",
+        "assets": ["*.md"]
       }
     },
-    "serve": {
-      "executor": "@nx/js:node",
-      "defaultConfiguration": "development",
-      "dependsOn": ["build"],
+    "lint": {
+      "command": "eslint ./src ./package.json"
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{options.reportsDirectory}"],
       "options": {
-        "buildTarget": "vms-project:build",
-        "runBuildTargetDependencies": false
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "vms-project:build:development"
-        },
-        "production": {
-          "buildTarget": "vms-project:build:production"
-        }
+        "reportsDirectory": "coverage/vms-project"
       }
-    },
-    "docker-build": {
-      "dependsOn": ["build"],
-      "command": "docker build -f Dockerfile . -t vms-project"
     }
   }
 }
